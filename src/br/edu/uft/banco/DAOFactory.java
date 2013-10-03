@@ -30,7 +30,7 @@ public abstract class DAOFactory {
         return instance;
     }
 
-    abstract Connection getConnection() throws SQLException;
+    public abstract Connection getConnection() throws SQLException;
 }
 
 class DriverManagerDAOFactory extends DAOFactory {
@@ -46,7 +46,9 @@ class DriverManagerDAOFactory extends DAOFactory {
     }
 
     @Override
-    Connection getConnection() throws SQLException {
+    public Connection getConnection() throws SQLException {        
         return DriverManager.getConnection(url, username, password);
     }
+    
+    
 }

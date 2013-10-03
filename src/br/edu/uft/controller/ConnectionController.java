@@ -5,6 +5,7 @@
 package br.edu.uft.controller;
 
 import br.edu.uft.banco.DAOFactory;
+import br.edu.uft.dao.BancoDAO;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -32,15 +33,20 @@ public class ConnectionController implements Initializable {
     private TextField porta;
     @FXML
     private TextField usuario;
+    
+    //Controladores
+    DBConnectionController dBConnectionController;
 
     @FXML
     void conectar(ActionEvent event) {
-        DAOFactory instance = DAOFactory.getInstance(host.getText(), Integer.parseInt(porta.getText()), usuario.getText(),
-                                      password.getText(), bancoDeDados.getText());
-        instance.get
+        dBConnectionController.connect(host.getText(), porta.getText(), bancoDeDados.getText(),
+                usuario.getText(), password.getText());
+        new BancoDAO(dBConnectionController.connectionInstance).listTables();
+        
     }
 
     @Override
-    public void initialize(URL url, ResourceBundle rb) {       
+    public void initialize(URL url, ResourceBundle rb) {
+        dBConnectionController = new DBConnectionController();
     }
 }
