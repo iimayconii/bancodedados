@@ -56,8 +56,8 @@
           <children>
             <MenuButton layoutX="1.0" layoutY="0.0" mnemonicParsing="false" prefWidth="200.0" text="Ferramentas">
               <items>
-                <MenuItem mnemonicParsing="false" onAction="#importarCSV" text="Importar csv" />
-                <MenuItem mnemonicParsing="false" onAction="#exportarCSV" text="Exportar csv" />
+                <MenuItem mnemonicParsing="false" text="Importar csv" />
+                <MenuItem mnemonicParsing="false" text="Exportar csv" />
               </items>
             </MenuButton>
             <TreeView fx:id="dataBases" layoutX="0.0" layoutY="21.0" prefHeight="503.0" prefWidth="200.0" />

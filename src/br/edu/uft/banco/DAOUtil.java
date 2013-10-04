@@ -74,6 +74,11 @@ public class DAOUtil {
         close(connection);
     }
 
+    public static void close(Statement statement, ResultSet resultSet) {
+        close(resultSet);
+        close(statement);
+    }
+
     public static void close(Connection connection, Statement statement, ResultSet resultSet) {
         close(resultSet);
         close(statement);

@@ -4,22 +4,30 @@
  */
 package br.edu.uft.controller;
 
-import br.edu.uft.banco.DAOFactory;
 import br.edu.uft.dao.BancoDAO;
-import java.net.URL;
-import java.util.ResourceBundle;
+import br.edu.uft.model.Banco;
+import br.edu.uft.model.Table;
+import java.io.IOException;
+import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 /**
  *
  * @author maycon
  */
-public class ConnectionController implements Initializable {
+public final class ConnectionController extends Pane {
 
     @FXML
     private TextField bancoDeDados;
@@ -33,20 +41,94 @@ public class ConnectionController implements Initializable {
     private TextField porta;
     @FXML
     private TextField usuario;
-    
+    private Banco database;
     //Controladores
     DBConnectionController dBConnectionController;
+    Stage stage;
+
+    public ConnectionController(Stage stage) {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/br/edu/uft/appConnect.fxml"));
+        fxmlLoader.setRoot(this);
+        fxmlLoader.setController(this);
+        try {
+            fxmlLoader.load();
+            this.stage = stage;
+        } catch (IOException exception) {
+            throw new RuntimeException(exception);
+        }
+        dBConnectionController = new DBConnectionController();
+    }
 
     @FXML
     void conectar(ActionEvent event) {
         dBConnectionController.connect(host.getText(), porta.getText(), bancoDeDados.getText(),
                 usuario.getText(), password.getText());
-        new BancoDAO(dBConnectionController.connectionInstance).listTables();
-        
+        this.database = new BancoDAO(dBConnectionController.connectionInstance).getTable();
+        this.stage.close();
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        dBConnectionController = new DBConnectionController();
+    public TextField getBancoDeDados() {
+        return bancoDeDados;
     }
+
+    public void setBancoDeDados(TextField bancoDeDados) {
+        this.bancoDeDados = bancoDeDados;
+    }
+
+    public TextField getHost() {
+        return host;
+    }
+
+    public void setHost(TextField host) {
+        this.host = host;
+    }
+
+    public Label getLabel() {
+        return label;
+    }
+
+    public void setLabel(Label label) {
+        this.label = label;
+    }
+
+    public PasswordField getPassword() {
+        return password;
+    }
+
+    public void setPassword(PasswordField password) {
+        this.password = password;
+    }
+
+    public TextField getPorta() {
+        return porta;
+    }
+
+    public void setPorta(TextField porta) {
+        this.porta = porta;
+    }
+
+    public TextField getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(TextField usuario) {
+        this.usuario = usuario;
+    }
+
+    public DBConnectionController getdBConnectionController() {
+        return dBConnectionController;
+    }
+
+    public void setdBConnectionController(DBConnectionController dBConnectionController) {
+        this.dBConnectionController = dBConnectionController;
+    }
+
+    public Banco getDatabase() {
+        return database;
+    }
+
+    public void setDatabase(Banco database) {
+        this.database = database;
+    }
+ 
 }

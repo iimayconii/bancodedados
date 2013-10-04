@@ -5,7 +5,7 @@
 package br.edu.uft.controller;
 
 import br.edu.uft.banco.DAOFactory;
-import br.edu.uft.banco.DAOUtil;
+import br.edu.uft.dao.BancoDAO;
 
 /**
  *
@@ -13,8 +13,9 @@ import br.edu.uft.banco.DAOUtil;
  */
 public class DBConnectionController {
     DAOFactory connectionInstance;
-
-    public DBConnectionController() {        
+    BancoDAO bancoDAO;
+    public DBConnectionController() {
+        this.bancoDAO = new BancoDAO(connectionInstance);
     }
     
     public void connect(String ip, String porta, String bancoDeDados,String username, String password){
@@ -32,5 +33,13 @@ public class DBConnectionController {
     public void setConnectionInstance(DAOFactory connectionInstance) {
         this.connectionInstance = connectionInstance;
     }
+
+    public BancoDAO getBancoDAO() {
+        return bancoDAO;
+    }
+
+    public void setBancoDAO(BancoDAO bancoDAO) {
+        this.bancoDAO = bancoDAO;
+    }        
     
 }

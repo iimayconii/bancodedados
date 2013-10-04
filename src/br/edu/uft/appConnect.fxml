@@ -7,8 +7,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="188.0" prefWidth="589.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="br.edu.uft.controller.ConnectionController">
-  <children>
+ <fx:root type="javafx.scene.layout.Pane" prefHeight="188.0" prefWidth="589.0" xmlns:fx="http://javafx.com/fxml"> 
+    
+    <children>
     <Label fx:id="label" layoutX="126.0" layoutY="120.0" minHeight="16.0" minWidth="69.0" />
     <HBox layoutX="37.0" layoutY="170.0" prefHeight="32.0" prefWidth="552.0" />
     <Pane layoutX="14.0" layoutY="10.0" prefHeight="176.0" prefWidth="578.0">
@@ -53,4 +54,4 @@
       </children>
     </Pane>
   </children>
-</AnchorPane>
+</fx:root>
