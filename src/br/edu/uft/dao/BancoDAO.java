@@ -90,6 +90,17 @@ public class BancoDAO {
         executeSql(sqlInsert);
     }
 
+    public void executeQuery(String sql) throws SQLException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultado = null;
+        connection = daoFactory.getConnection();        
+        preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.execute();
+        DAOUtil.close(connection, preparedStatement, resultado);
+
+    }
+
     public void executeSql(String sql) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;

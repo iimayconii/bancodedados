@@ -4,7 +4,6 @@
  */
 package br.edu.uft;
 
-import br.edu.uft.banco.DAOFactory;
 import br.edu.uft.controller.ConnectionController;
 import br.edu.uft.dao.BancoDAO;
 import br.edu.uft.dao.DataDao;
@@ -30,15 +29,9 @@ import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.ContextMenu;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
@@ -51,15 +44,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author maycon
  */
 public class appViewController implements Initializable {
-
-    @FXML
-    private Label label;
+    
     @FXML
     private TreeView dataBases;
     @FXML
@@ -79,6 +71,20 @@ public class appViewController implements Initializable {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.showAndWait();
         dataBases.setRoot(treeItemRoot(connection.getDatabase()));
+    }
+
+    @FXML
+    void showSQLEditor(ActionEvent event) {
+        if (connection.getDatabase() != null) {
+            Stage stage = new Stage();
+            SqlEditorController sqlEditor = new SqlEditorController(stage,
+                    connection.getdBConnectionController());
+            Scene scene = new Scene(sqlEditor);
+            stage.setScene(scene);
+            stage.show();
+        }else{
+            JOptionPane.showMessageDialog(null, "Você não conectou em um banco de dados!");
+        }
     }
 
     public TreeItem<String> treeItemRoot(Banco banco) {

@@ -6,20 +6,13 @@ package br.edu.uft.controller;
 
 import br.edu.uft.dao.BancoDAO;
 import br.edu.uft.model.Banco;
-import br.edu.uft.model.Table;
 import java.io.IOException;
-import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeView;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -42,7 +35,7 @@ public final class ConnectionController extends Pane {
     @FXML
     private TextField usuario;
     private Banco database;
-    //Controladores
+    
     DBConnectionController dBConnectionController;
     Stage stage;
 
